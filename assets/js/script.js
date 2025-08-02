@@ -6,9 +6,9 @@ class WanderWiseLoader {
     this.loaderText = document.querySelector(".loader-text");
     this.loaderProgress = document.querySelector(".loader-progress");
     this.loaderParticles = document.getElementById("loaderParticles");
-    this.minLoadingTime = 3000; 
+    this.minLoadingTime = 500;
     this.startTime = Date.now();
-    this.currentLoaderType = 1; 
+    this.currentLoaderType = 1;
     this.adventureQuotes = [
       "Discover Your Next Adventure",
       "Adventure Awaits Your Arrival",
@@ -91,7 +91,7 @@ class WanderWiseLoader {
         progress += Math.random() * 2;
       }
       if (progress > 98) {
-        progress = 98; 
+        progress = 98;
       }
       this.updateProgress(progress);
       if (progress >= 98) {
@@ -577,7 +577,7 @@ class LetterAnimation {
       element.classList.add(animationClass);
       text.split("").forEach((char, charIndex) => {
         const span = document.createElement("span");
-        span.textContent = char === " " ? "\u00A0" : char; 
+        span.textContent = char === " " ? "\u00A0" : char;
         span.className = "letter";
         span.style.setProperty("--i", charIndex + elementIndex * 10);
         if (char === " ") {
@@ -738,3 +738,13 @@ function restartAllAnimations() {
     });
   }
 }
+
+// Emergency fallback to ensure page is visible
+setTimeout(() => {
+  document.body.classList.remove("fade");
+  document.body.classList.add("page-loaded");
+  const pageLoader = document.getElementById("pageLoader");
+  if (pageLoader) {
+    pageLoader.style.display = "none";
+  }
+}, 1000);
